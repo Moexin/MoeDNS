@@ -1,0 +1,8 @@
+#!/bin/sh
+curl -L https://cdn.jsdelivr.net/gh/Moexin/MoeDNS@Files/etc/mosdns/rules/china_domain_list.txt -o /etc/mosdns/rules/china_domain_list.txt
+curl -L https://cdn.jsdelivr.net/gh/Moexin/MoeDNS@Files/etc/mosdns/rules/gfw_domain_list.txt -o /etc/mosdns/rules/gfw_domain_list.txt
+curl -L https://cdn.jsdelivr.net/gh/Moexin/MoeDNS@Files/etc/mosdns/rules/cdn_domain_list.txt -o /etc/mosdns/rules/cdn_domain_list.txt
+curl -L https://cdn.jsdelivr.net/gh/Moexin/MoeDNS@Files/etc/mosdns/rules/china_ip_list.txt -o /etc/mosdns/rules/china_ip_list.txt
+curl -L https://cdn.jsdelivr.net/gh/Moexin/MoeDNS@Files/etc/mosdns/rules/gfw_ip_list.txt -o /etc/mosdns/rules/gfw_ip_list.txt
+curl -L https://cdn.jsdelivr.net/gh/Moexin/MoeDNS@Files/etc/mosdns/rules/cf_ip_list.txt -o /etc/mosdns/rules/cf_ip_list.txt
+curl -L https://cdn.jsdelivr.net/gh/Moexin/MoeDNS@Files/etc/mosdns/rules/ad_domain_list.txt -o /etc/mosdns/rules/ad_domain_list.txt
