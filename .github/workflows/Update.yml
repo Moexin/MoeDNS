@@ -1,0 +1,41 @@
+name: Update
+
+on:
+  push:
+  schedule:
+    - cron: 0 1,7,13,19 * * *
+
+env:
+  TZ: Asia/Shanghai
+
+jobs:
+  Update:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: GetTime
+      run: echo "GET_TIME=$(date +'%Y-%m-%d %H:%M:%S CST')" >> $GITHUB_ENV
+
+    - name: Update
+      run: |
+        curl -L https://raw.githubusercontent.com/pmkol/easymosdns/rules/china_domain_list.txt -o ./etc/moedns/rules/china_domain_list.txt
+        curl -L https://raw.githubusercontent.com/pmkol/easymosdns/rules/cdn_domain_list.txt -o ./etc/moedns/rules/cdn_domain_list.txt
+        curl -L https://raw.githubusercontent.com/pmkol/easymosdns/rules/gfw_domain_list.txt -o ./etc/moedns/rules/gfw_domain_list.txt
+        curl -L https://raw.githubusercontent.com/Cats-Team/AdRules/main/mosdns_adrules.txt -o ./etc/moedns/rules/ad_domain_list.txt
+        curl -L https://raw.githubusercontent.com/pmkol/easymosdns/rules/china_ip_list.txt -o ./etc/moedns/rules/china_ip_list.txt
+        curl -L https://raw.githubusercontent.com/pmkol/easymosdns/rules/gfw_ip_list.txt -o ./etc/moedns/rules/gfw_ip_list.txt
+
+    - name: Clean
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git checkout --orphan latest_branch
+        git add -A
+        git commit -am "${GET_TIME}"
+        git branch -D Files
+        git branch -m Files
+
+    - name: Push
+      run: git push -f origin Files
