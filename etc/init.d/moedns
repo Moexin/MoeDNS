@@ -1,0 +1,23 @@
+#!/bin/sh /etc/rc.common
+
+STOP=89
+START=35
+USE_PROCD=1
+SERVICE_USE_PID=1
+SERVICE_WRITE_PID=1
+SERVICE_DAEMONIZE=1
+
+start_service() {
+	procd_open_instance
+	procd_set_param command /usr/bin/moedns start -d /etc/moedns -c /etc/moedns/config.yaml
+	procd_set_param respawn
+	procd_close_instance
+}
+
+restart_service() {
+	service_restart /usr/bin/moedns start -d /etc/moedns -c /etc/moedns/config.yaml
+}
+
+stop_service() {
+	service_stop /usr/bin/moedns start -d /etc/moedns -c /etc/moedns/config.yaml
+}
